@@ -19,6 +19,7 @@ function createSquares()
         square.style.backgroundColor = "#fff";
         containerDiv.appendChild(square);
         square.addEventListener("mouseover", (e) => {
+            let hoverTimes = 100;
             const randomColor = getRandomColor();
             console.log(randomColor);
             e.target.style.backgroundColor = randomColor;
@@ -31,7 +32,20 @@ function toggleNumOfSquares()
     toggleNumSquaresButton.classList.add("button");
     toggleNumSquaresButton.textContent = "Change Number of Squares Per Side"; 
     toggleNumSquaresButton.addEventListener("click", () => {
-        defaultSquareSize = parseInt(prompt("Enter the number of squares per side: "));
+        toggledSquareSize = parseInt(prompt("Enter the number of squares per side (1-100): "));
+        if (toggledSquareSize < 1)
+        {
+            alert('Negative values are not accepted.');
+        }
+        else if(toggledSquareSize > 100)
+        {
+            alert('Values greater than 100 are not accepted.');
+        }
+        else
+        {
+            defaultSquareSize = toggledSquareSize;
+        }
+     
         numOfSquares = 960 / defaultSquareSize;
         containerDiv.innerHTML = ""; 
         createSquares(); 
